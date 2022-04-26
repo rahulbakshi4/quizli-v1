@@ -1,0 +1,36 @@
+@import url("https://minimali-ui.vercel.app/css/components.css");
+@import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
+*{
+    box-sizing: border-box;
+}
+body,h1,h2,h3,h4,figure,picture,p{
+    margin: 0;
+    
+}
+h1,h2,h3,h4,p{
+    font-weight: 400;
+}
+body{
+    color: var(--clr-dark);
+    background-color:var(--clr-white);
+    line-height: 1.5;
+    min-height: 100vh;
+    max-width: 75rem;
+    margin-inline: auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+img,picture{
+    max-width: 100%;
+    display: block;
+}
+input,button,textarea,select{
+    font: inherit;
+}
+
+.ff-title {
+    font-family: "Pacifico", cursive;
+}
+.decoration-none{
+    text-decoration: none;
+}
