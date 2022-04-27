@@ -1,0 +1,14 @@
+.home-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 2rem auto;
+  }
+.play-btn-container{
+    padding: .5rem 0;
+}
+.card{
+    box-shadow: none;
+    border: 2px solid var(--clr-gray-light);
+}

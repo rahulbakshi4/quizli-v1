@@ -1,0 +1,33 @@
+.navbar{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1rem 2rem .5rem;   
+    flex-wrap: wrap;   
+}
+.navbar-right{
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    padding-left: 0;
+    margin: 0;
+}
+.links{
+    color: var(--clr-dark);
+    text-decoration: none;
+    display: block;
+}
+
+.navbar-right li{
+    padding: .5rem;
+    border-radius: 5px;
+}
+.nav-icons {
+    display: flex;
+  }
+@media only screen and (max-width: 600px ){
+    .navbar{
+        padding-inline: 1rem;
+    }
+
+}

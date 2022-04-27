@@ -34,3 +34,11 @@ input,button,textarea,select{
 .decoration-none{
     text-decoration: none;
 }
+.component-container:hover,
+.navbar-right li:hover,
+.hero-btn-outline:hover,
+.card:hover
+ {
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 300ms ease 0ms;
+}
