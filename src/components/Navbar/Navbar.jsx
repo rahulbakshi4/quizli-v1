@@ -8,7 +8,7 @@ export const Navbar = () => {
     <ul className="navbar-right text-normal">
         <li className="nav-icons">
         <span className="material-icons">person</span>
-        <a className="links" href="">Login</a></li>
+        <Link to="/login" className="links">Login</Link></li>
     </ul>
 </nav>
   )

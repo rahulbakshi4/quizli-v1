@@ -1,2 +1,4 @@
-export { Home } from "../pages/Home"
-export { Categories } from "../pages/Categories"
+export { Home } from "./Home"
+export { Categories } from "./Categories"
+export { Login } from "./Login"
+export { Signup } from "./Signup"
