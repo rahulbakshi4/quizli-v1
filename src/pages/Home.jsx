@@ -17,7 +17,7 @@ export const Home = () => {
                         <Link to="/" className="text-white">Test Yourself</Link>
                     </button>
                     <button className="buttons hero-btn-outline fw-bold">
-                        <Link to="/categories" className="text-dark">See Categories</Link>
+                        <Link to="/login" className="text-dark">See Categories</Link>
                     </button>
                 </div>
 

@@ -1,18 +1,40 @@
 import "../styles/auth.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useRef } from "react"
+import { useAuth } from "../context/auth-context"
 export const Signup = () => {
+ const {auth, signup,updateProfile } = useAuth()
+ const  navigate = useNavigate()
+ const nameRef = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const passwordConfirmRef = useRef()
+
+  const signupHandler = async (e) =>{
+    e.preventDefault()
+      try{
+          const res = await signup(emailRef.current.value,passwordRef.current.value)
+          if(res){
+            await updateProfile(auth.currentUser, { displayName: nameRef.current.value })
+              navigate('/login')
+          }
+      }
+      catch(err){
+          console.log("error",err)
+      }
+  } 
   return (
     <main>
     <div className="form-container">
         <h1 className="text-2xl fw-xbold text-center">Sign Up Here</h1>
 
-        <form>
+        <form onSubmit={signupHandler}>
             <div className="form-content">
                 <div className="label-container">
                     <label htmlFor="name">
                         Name
                     </label>
-                    <input type="text" name="name" placeholder="Enter Your Name" required />
+                    <input type="text" name="name" placeholder="Enter Your Name" ref={nameRef} required />
                 </div>
             </div>
             <div className="form-content">
@@ -20,7 +42,7 @@ export const Signup = () => {
                     <label htmlFor="email">
                         Email
                     </label>
-                    <input  type="email" name="email" placeholder="test.js@gmail.com" required />
+                    <input  type="email" name="email" placeholder="test.js@gmail.com" ref={emailRef} required />
                 </div>
             </div>
 
@@ -29,7 +51,7 @@ export const Signup = () => {
                     <label htmlFor="password">
                         Password
                     </label>
-                    <input  type="password" name="password" placeholder="*********" required />
+                    <input  type="password" name="password" placeholder="*********" ref={passwordRef} required />
                 </div>
             </div>
 
@@ -38,7 +60,7 @@ export const Signup = () => {
                     <label htmlFor="confirmPassword">
                         Confirm Password
                     </label>
-                    <input type="password" name="confirmpassword" placeholder="*********" required />
+                    <input type="password" name="confirmpassword" placeholder="*********"  ref={passwordConfirmRef} required />
                 </div>
             </div>
 

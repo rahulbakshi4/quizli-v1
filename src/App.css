@@ -34,6 +34,9 @@ input,button,textarea,select{
 .decoration-none{
     text-decoration: none;
 }
+.pointer{
+    cursor: pointer;
+}
 .component-container:hover,
 .navbar-right li:hover,
 .hero-btn-outline:hover,
