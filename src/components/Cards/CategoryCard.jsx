@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import "./card.css"
 export const CategoryCard = ({_id,category,imageURL,description}) => {
+
   return (
     
         <div className="card">
@@ -17,7 +18,7 @@ export const CategoryCard = ({_id,category,imageURL,description}) => {
                        {description}
                     </p>
                     <div className="play-btn-container">
-                        <button className="btn"><Link to="/" className="text-white decoration-none">Play Now</Link></button>
+                        <button className="btn"><Link to='/rules' state={{id:_id}} className="text-white decoration-none">Play Now</Link></button>
                     </div>
                 </div>
             </div>
