@@ -37,6 +37,16 @@ input,button,textarea,select{
 .pointer{
     cursor: pointer;
 }
+
+.component-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid var(--clr-gray);
+    border-radius: 10px;
+    gap: 1.5rem;
+    padding: 2rem;
+}
 .component-container:hover,
 .navbar-right li:hover,
 .hero-btn-outline:hover,

@@ -1,0 +1,23 @@
+.rules-head {
+    border-bottom: 2px solid var(--clr-gray);
+}
+.rules-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+.rules-section ul {
+    padding-left: 0;
+    padding: 1rem;
+}
+.rules-section li {
+    padding: 0.5rem;
+}
+.rule-btn {
+    padding: 1rem;
+    width: 30%;
+    align-self: center;
+    text-transform: uppercase;
+}
+  

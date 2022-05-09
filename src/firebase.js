@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { collection, getFirestore } from "firebase/firestore"
 const app = initializeApp({
 
     apiKey: "AIzaSyDl8ZV6OERpe9-NNW-j1Dtsf0xMC6gJ32c",
@@ -12,4 +13,6 @@ const app = initializeApp({
 })
 
 export const auth = getAuth(app)
+export const db = getFirestore()
+export const quizColRef = collection(db, "quizzes")
 export default app

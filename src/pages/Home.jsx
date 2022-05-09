@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
+import { useAuth } from "../context/auth-context"
 import "../styles/home.css"
 export const Home = () => {
+    const {user} = useAuth()
   return (
     <main>
         <section className="hero-section">
@@ -17,7 +19,7 @@ export const Home = () => {
                         <Link to="/" className="text-white">Test Yourself</Link>
                     </button>
                     <button className="buttons hero-btn-outline fw-bold">
-                        <Link to="/login" className="text-dark">See Categories</Link>
+                        <Link to={user.token?"/categories":"/login"} className="text-dark">See Categories</Link>
                     </button>
                 </div>
 
