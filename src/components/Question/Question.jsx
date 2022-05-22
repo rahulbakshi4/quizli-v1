@@ -1,21 +1,26 @@
 import "./question.css"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useQuizData } from "../../context/quiz-context"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from "../../firebase"
+import { Loader } from "../Loader/Loader"
 export const Question = () => {
     const { id } = useParams()
-    const { quizData, setQuizData, userInput, setUserInput } = useQuizData()
+    const navigate = useNavigate()
+    const { quizData, setQuizData, userInput, setUserInput,score,setScore } = useQuizData()
     const [quesIndex, setQuesIndex] = useState(0)
     const [isSelected, setIsSelected] = useState(false)
+    const [loading,setLoading] = useState(false)
 
     useEffect(() => {
         const getDocByID = async (id) => {
             try {
+                setLoading(true)
                 const res = await getDoc(doc(db, 'quizzes', id))
                 if (res.exists()) {
                     setQuizData(res.data())
+                    setLoading(false)
                 }
             } catch (error) {
                 console.log(error)
@@ -24,8 +29,13 @@ export const Question = () => {
         getDocByID(id)
     }, [id])
 
+    const clickHandler = (option) =>{
+        setUserInput([...userInput, option])
+        setIsSelected(true)
+        option===quizData.questions[quesIndex].answer ? setScore((score)=>score+10) : setScore(score)   }
     return (
-        <main>
+          <main>
+          {loading ? <Loader/> :
             <section className="question-section">
                 <div className="question-container">
                     <div>
@@ -36,7 +46,7 @@ export const Question = () => {
                         {quizData.questions?.[quesIndex].options.map((option, index) =>
                             <button key={index}
                                 value={option}
-                                onClick={() => { setUserInput([...userInput, option]); setIsSelected(true) }}
+                                onClick={() => {clickHandler(option)}}
                                 disabled={isSelected && userInput[quesIndex] !== option}
                                 className={`${(isSelected && userInput[quesIndex] !== option) ?
                                     "btn bg-gray text-dark" : "btn outlined"}`}>
@@ -53,13 +63,14 @@ export const Question = () => {
                                     setQuesIndex((quesIndex) => quesIndex + 1);
                                     setIsSelected(false)
                                 }}>Next</span> :
-                                <span className="text-white decoration-none">See Result</span>}
+                                <span onClick={()=>{navigate(`/result/${id}`);
+                                localStorage.setItem('userScore',score)}} className="text-white decoration-none">See Result</span>}
                             <span className="material-icons md-18">east</span>
                         </button>
 
                     </div>
                 </div>
-            </section>
+            </section>}
         </main>
     )
 }

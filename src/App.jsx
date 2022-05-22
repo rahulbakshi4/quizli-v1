@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Categories, Home, Login, Questions, Rules, Signup } from './pages'
+import { Categories, Home, Login, Questions, Result, Rules, Signup } from './pages'
 import { Navbar } from './components'
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/rules' element={<Rules/>}/>
         <Route path='/quiz/:id' element={<Questions/>}/>
+        <Route path='/result/:id' element={<Result/>}/>
       </Routes>
     </Router>
   )
