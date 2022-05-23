@@ -1,0 +1,35 @@
+.result-container{
+    padding: 1rem;
+    max-width: 80vw;
+    margin: 1rem auto;
+}
+.result-content{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.result-title{
+    margin-bottom: .5rem;
+    border-bottom: 1px solid var(--clr-gray);
+}
+.result-head{
+    padding: 1rem;
+}
+.score-details{
+    display: flex;
+    justify-content: space-between;
+}
+.result-options{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+.result-options >.btn:hover{
+    opacity: 1; 
+}
+@media (min-width:900px){
+    .result-container{
+        max-width: 60vw;
+    }
+}

@@ -7,6 +7,7 @@ const navigate = useNavigate()
  const logoutHandler = () =>{
    logout();
    localStorage.removeItem("userInfo")
+   localStorage.removeItem("userScore")
    setUser({token: '', userID: '', displayName: '',email: ''})
    navigate("/login")
  }
