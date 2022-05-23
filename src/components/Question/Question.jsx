@@ -5,6 +5,7 @@ import { useQuizData } from "../../context/quiz-context"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from "../../firebase"
 import { Loader } from "../Loader/Loader"
+import toast from "react-hot-toast"
 export const Question = () => {
     const { id } = useParams()
     const navigate = useNavigate()
@@ -12,7 +13,6 @@ export const Question = () => {
     const [quesIndex, setQuesIndex] = useState(0)
     const [isSelected, setIsSelected] = useState(false)
     const [loading,setLoading] = useState(false)
-
     useEffect(() => {
         const getDocByID = async (id) => {
             try {
@@ -33,8 +33,19 @@ export const Question = () => {
     const clickHandler = (option) =>{
         setIsSelected(true)
         setUserInput([...userInput, option])
-        option===quizData.questions[quesIndex].answer ? setScore((score)=>score+10) : setScore(score)   }
-        console.log(isSelected)
+        option===quizData.questions[quesIndex].answer ? setScore((score)=>score+10) : setScore(score)   
+    }
+
+    const quitHandler = () => {
+        toast.loading('Leaving Quiz',{duration: 800})
+        setScore(0)
+        setUserInput([])
+        localStorage.removeItem('userInput')
+        setTimeout(() => {
+            navigate("/categories")
+            toast.success('Quiz Data Cleared',{duration: 800})
+        }, 1000); 
+    }
     return (
           <main>
           {loading ? <Loader/> :
@@ -55,10 +66,10 @@ export const Question = () => {
                                 {option}</button>)}
                     </div>
                     <div className="question-footer">
-                        <div className="timer">
-                            <span className="material-icons-outlined md-18">timer</span>
-                            <span className="fw-semibold">0:59</span>
-                        </div>
+                        <button className="quit-quiz btn outlined" onClick={()=>{quitHandler()}}>
+                           <span class="material-icons-outlined">cancel</span>
+                           <span class="fw-semibold">Quit</span>
+                        </button>
                         <button className="btn icon-text-btn">
                             {quesIndex < quizData.questions?.length - 1 ?
                                 <span className="text-white decoration-none" onClick={() => {

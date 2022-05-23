@@ -20,7 +20,7 @@ export const Home = () => {
                             <Link to={user.token ? "/categories" : "/login"} className="text-white">Test Yourself</Link>
                         </button>
                         <button className="buttons hero-btn-outline fw-bold">
-                            <Link to="/" className="text-dark">Github</Link>
+                            <a href="https://github.com/rahulbakshi4/quizli-v1" target="_blank" rel="noopener" className="text-dark">Github</a>
                         </button>
 
                     </div>

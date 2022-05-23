@@ -35,7 +35,7 @@
     justify-content: space-between;
     align-items: center;
 }
-.timer{
+.quit-quiz{
     display: flex;
     align-items: center;
     gap: .25rem;
