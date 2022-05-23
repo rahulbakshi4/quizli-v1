@@ -24,15 +24,17 @@ export const Question = () => {
                 }
             } catch (error) {
                 console.log(error)
+                toast.error('Something Went Wrong!',{duration: 1500, position: 'bottom-center'})
             }
         }
         getDocByID(id)
     }, [id])
 
     const clickHandler = (option) =>{
-        setUserInput([...userInput, option])
         setIsSelected(true)
+        setUserInput([...userInput, option])
         option===quizData.questions[quesIndex].answer ? setScore((score)=>score+10) : setScore(score)   }
+        console.log(isSelected)
     return (
           <main>
           {loading ? <Loader/> :
@@ -47,9 +49,9 @@ export const Question = () => {
                             <button key={index}
                                 value={option}
                                 onClick={() => {clickHandler(option)}}
-                                disabled={isSelected && userInput[quesIndex] !== option}
+                                disabled={isSelected }
                                 className={`${(isSelected && userInput[quesIndex] !== option) ?
-                                    "btn bg-gray text-dark" : "btn outlined"}`}>
+                                    "btn bg-gray text-dark" : (isSelected && userInput[quesIndex] ===option) ? "btn " : "btn outlined"}`}>
                                 {option}</button>)}
                     </div>
                     <div className="question-footer">
@@ -64,7 +66,8 @@ export const Question = () => {
                                     setIsSelected(false)
                                 }}>Next</span> :
                                 <span onClick={()=>{navigate(`/result/${id}`);
-                                localStorage.setItem('userScore',score)}} className="text-white decoration-none">See Result</span>}
+                                localStorage.setItem('userScore',score)
+                                localStorage.setItem('userInput',JSON.stringify(userInput))}} className="text-white decoration-none">See Result</span>}
                             <span className="material-icons md-18">east</span>
                         </button>
 

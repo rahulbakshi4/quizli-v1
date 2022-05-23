@@ -2,6 +2,7 @@ import "../styles/auth.css"
 import { Link, useNavigate } from "react-router-dom"
 import { useRef } from "react"
 import { useAuth } from "../context/auth-context"
+import toast from 'react-hot-toast';
 export const Signup = () => {
  const {auth, signup,updateProfile } = useAuth()
  const  navigate = useNavigate()
@@ -16,11 +17,13 @@ export const Signup = () => {
           const res = await signup(emailRef.current.value,passwordRef.current.value)
           if(res){
             await updateProfile(auth.currentUser, { displayName: nameRef.current.value })
+            toast.success('Signed Up Successfully!',{duration: 1500, position: 'bottom-center'});
               navigate('/login')
           }
       }
       catch(err){
           console.log("error",err)
+          toast.error('Something Went Wrong!',{duration: 1500, position: 'bottom-center'})
       }
   } 
   return (

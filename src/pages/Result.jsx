@@ -1,3 +1,4 @@
+import "../styles/result.css"
 import { useNavigate, useParams } from "react-router-dom"
 import { useQuizData } from "../context/quiz-context"
 import { useEffect } from "react"
@@ -7,8 +8,8 @@ export const Result = () => {
 
   const navigate = useNavigate()
   const { id } = useParams()
-  const { quizData, setQuizData, userInput, score, setUserInput, setScore } = useQuizData()
-
+  const { quizData, setQuizData, setUserInput, setScore } = useQuizData()
+  const userInput = JSON.parse(localStorage.getItem('userInput'))
   useEffect(() => {
     const getDocByID = async (id) => {
       try {
@@ -18,6 +19,7 @@ export const Result = () => {
         }
       } catch (error) {
         console.log(error)
+        toast.error('Something Went Wrong!',{duration: 1500, position: 'bottom-center'})
       }
     }
     getDocByID(id)
@@ -26,6 +28,7 @@ export const Result = () => {
   const clickHandler = () => {
     setScore(0)
     setUserInput([])
+    localStorage.removeItem('userInput')
     navigate("/categories")
   }
 
@@ -48,7 +51,7 @@ export const Result = () => {
                 <p>{question}</p>
               </div>
               <div className="result-options">
-                {options.map((option) => <span className={`btn text-center ${option === answer ? "btn-success" : "btn-danger"}`}>{option}</span>)
+                {options.map((option) => <span className={`btn text-center ${option === answer ? "btn-success" : (userInput[index]!==answer && userInput[index]===option) ? "btn-danger" : "bg-gray text-dark"}`}>{option}</span>)
                 }
               </div>
               <p className="fw-semibold text-right">{`${userInput[index] === answer ? 10 : 0} Points awarded`}</p>
