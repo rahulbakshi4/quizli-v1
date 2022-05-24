@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom"
+import { useQuizData } from "../../context/quiz-context"
 import "./card.css"
 export const CategoryCard = ({_id,category,imageURL,description}) => {
-
+    const {setUserInput, setScore } = useQuizData()
+    const clickHandler = () =>{
+        setScore(0)
+        setUserInput([])
+        localStorage.removeItem('userInput')
+    }
   return (
     
         <div className="card">
@@ -18,7 +24,7 @@ export const CategoryCard = ({_id,category,imageURL,description}) => {
                        {description}
                     </p>
                     <div className="play-btn-container">
-                        <button className="btn"><Link to='/rules' state={{id:_id}} className="text-white decoration-none">Play Now</Link></button>
+                        <button className="btn" onClick={()=>clickHandler()}><Link to='/rules' state={{id:_id}} className="text-white decoration-none">Play Now</Link></button>
                     </div>
                 </div>
             </div>

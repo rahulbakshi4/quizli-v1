@@ -1,7 +1,7 @@
 
 .question-section{
     padding: 1rem;
-    max-width: 80vw;
+    max-width: 90vw;
     margin: 1rem auto;
 }
 
@@ -42,6 +42,9 @@
     padding: .5rem 1rem;
     border: 1px solid var(--clr-dark);
     border-radius: 5px;
+}
+.cursor-disable{
+    cursor:not-allowed;
 }
 @media (min-width:900px){
     .question-section{

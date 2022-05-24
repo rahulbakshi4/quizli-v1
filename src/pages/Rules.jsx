@@ -28,7 +28,7 @@ export const Rules = () => {
                         with only one correct choice.
                     </li>
                 </ul>
-                <button className="btn rule-btn fw-semibold"><span className="text-white decoration-none" onClick={()=>navigate('/quiz/'+location.state.id ,{replace:true})}>Start Quiz</span></button>
+                <button className="btn rule-btn fw-semibold" onClick={()=>navigate('/quiz/'+location.state.id ,{replace:true})}><span className="text-white decoration-none">Start Quiz</span></button>
             </div>
         </section>
     </main>

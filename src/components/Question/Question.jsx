@@ -62,26 +62,32 @@ export const Question = () => {
                                 onClick={() => {clickHandler(option)}}
                                 disabled={isSelected }
                                 className={`${(isSelected && userInput[quesIndex] !== option) ?
-                                    "btn bg-gray text-dark" : (isSelected && userInput[quesIndex] ===option) ? "btn " : "btn outlined"}`}>
+                                    "btn bg-gray text-dark cursor-disable" : (isSelected && userInput[quesIndex] ===option) ? "btn" : "btn outlined"}`}>
                                 {option}</button>)}
                     </div>
                     <div className="question-footer">
                         <button className="quit-quiz btn outlined" onClick={()=>{quitHandler()}}>
-                           <span class="material-icons-outlined">cancel</span>
-                           <span class="fw-semibold">Quit</span>
-                        </button>
-                        <button className="btn icon-text-btn">
-                            {quesIndex < quizData.questions?.length - 1 ?
-                                <span className="text-white decoration-none" onClick={() => {
-                                    setQuesIndex((quesIndex) => quesIndex + 1);
-                                    setIsSelected(false)
-                                }}>Next</span> :
-                                <span onClick={()=>{navigate(`/result/${id}`);
-                                localStorage.setItem('userScore',score)
-                                localStorage.setItem('userInput',JSON.stringify(userInput))}} className="text-white decoration-none">See Result</span>}
-                            <span className="material-icons md-18">east</span>
+                           <span className="material-icons-outlined">cancel</span>
+                           <span className="fw-semibold">Quit</span>
                         </button>
 
+
+                        {quesIndex < quizData.questions?.length - 1 && 
+                            <button className="btn icon-text-btn" onClick={() => {
+                                    setQuesIndex((quesIndex) => quesIndex + 1);
+                                    setIsSelected(false)
+                                }}>
+                            <span className="text-white decoration-none" >Next</span>
+                            <span className="material-icons md-18">east</span>
+                            </button>
+                        }
+                        {!(quesIndex < quizData.questions?.length - 1) && 
+                            <button className="btn icon-text-btn" onClick={()=>{navigate(`/result/${id}`);
+                                localStorage.setItem('userScore',score)
+                                localStorage.setItem('userInput',JSON.stringify(userInput))}} >
+                            <span className="text-white decoration-none">See Result</span>
+                            <span className="material-icons md-18">east</span>
+                        </button>}
                     </div>
                 </div>
             </section>}
