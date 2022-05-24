@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Alert } from "../components"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/auth-context"
+import toast from 'react-hot-toast';
 export const Login = () => {
     const navigate = useNavigate()
     const location = useLocation()
@@ -24,11 +25,13 @@ export const Login = () => {
                     email: res.user?.email
                 }))
                 setUser({...user,token: res.user?.accessToken,userID:res.user?.uid,displayName:res.user?.displayName})
+                toast.success('Logged In Successfully!',{duration: 1500, position: 'bottom-center'});
                 navigate(location.state?.from?.pathname || '/categories', { replace: true })
             }
         }
         catch (err) {
             console.log("error",err)
+            toast.error('Something Went Wrong!',{duration: 1500, position: 'bottom-center'})
             setError(true)
         }
     }

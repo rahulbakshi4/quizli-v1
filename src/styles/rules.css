@@ -20,4 +20,9 @@
     align-self: center;
     text-transform: uppercase;
 }
-  
+@media (max-width:530px){
+    .rule-btn {  
+        width: 50%;
+        padding-inline: .5rem;    
+    }
+} 

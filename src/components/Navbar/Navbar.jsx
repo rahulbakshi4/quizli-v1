@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/auth-context"
 import "./navbar.css"
+import toast from "react-hot-toast"
 export const Navbar = () => {
  const {user,setUser,logout}  = useAuth()
 const navigate = useNavigate()
@@ -9,6 +10,7 @@ const navigate = useNavigate()
    localStorage.removeItem("userInfo")
    localStorage.removeItem("userScore")
    setUser({token: '', userID: '', displayName: '',email: ''})
+   toast.success('Logged Out Successfully!',{duration: 1500, position: 'bottom-center'})
    navigate("/login")
  }
 
@@ -18,7 +20,7 @@ const navigate = useNavigate()
       <ul className="navbar-right text-normal">
         <li className="nav-icons">
           <span className="material-icons">person</span>
-          {user?.token ?<Link to="/profile" className="links">{user?.displayName}</Link> : <Link to="/login" className='links'>Log In</Link>} </li>
+          {user?.token ?<span className="links">{user?.displayName}</span> : <Link to="/login" className='links'>Log In</Link>} </li>
         {user?.token && <li className="pointer">
           <span className="pointer" onClick={()=>logoutHandler()}> Logout</span>
         </li>}
