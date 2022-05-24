@@ -41,9 +41,7 @@ Read more about setting up a firebase project here [docs](https://firebase.googl
 
 ## Preview 
 
-
-https://user-images.githubusercontent.com/44318721/170006597-94e10a5f-b0f6-4c12-bb86-006cecf24169.mp4
-
+https://user-images.githubusercontent.com/44318721/170009975-4232cf71-2596-4fc2-8c93-26dd2219c990.mp4
 
 
 
