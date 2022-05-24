@@ -1,9 +1,19 @@
-import { Link } from "react-router-dom"
+import { Link,Navigate, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/auth-context"
 import "../styles/home.css"
 import toast from "react-hot-toast"
 export const Home = () => {
     const { user } = useAuth()
+    const navigate = useNavigate()
+    const clickHandler = () => {
+        if(!user.token){
+            toast('Log in to continue !', { duration: 1500, position: 'bottom-center' })
+            navigate('/login')
+        }
+        else{
+            navigate('/categories')
+        }
+    }
     return (
         <main>
             <section className="hero-section">
@@ -16,8 +26,8 @@ export const Home = () => {
                     <p className="text-large">Quizli brings you a set of quizzes to try out your knowledge of various different
                         domains and test how much you really know.</p>
                     <div className="btn-container">
-                        <button className="buttons btn fw-bold" onClick={() => !user.token && toast('Log in to continue !', { duration: 1500, position: 'bottom-center' })}>
-                            <Link to={user.token ? "/categories" : "/login"} className="text-white">Test Yourself</Link>
+                        <button className="buttons btn fw-bold" onClick={() => clickHandler()}>
+                            <span className="text-white">Test Yourself</span>
                         </button>
                         <button className="buttons hero-btn-outline fw-bold">
                             <a href="https://github.com/rahulbakshi4/quizli-v1" target="_blank" rel="noopener" className="text-dark">Github</a>
