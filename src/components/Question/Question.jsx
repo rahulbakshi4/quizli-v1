@@ -13,6 +13,7 @@ export const Question = () => {
     const [quesIndex, setQuesIndex] = useState(0)
     const [isSelected, setIsSelected] = useState(false)
     const [loading,setLoading] = useState(false)
+    const [timer,setTimer] = useState(30)
     useEffect(() => {
         const getDocByID = async (id) => {
             try {
@@ -30,12 +31,41 @@ export const Question = () => {
         getDocByID(id)
     }, [id])
 
-    const clickHandler = (option) =>{
-        setIsSelected(true)
-        setUserInput([...userInput, option])
-        option===quizData.questions[quesIndex].answer ? setScore((score)=>score+10) : setScore(score)   
+    useEffect(() => {
+        const countDown = () => {
+            setTimer(timer => timer - 1)
+            if(timer === 0){
+               if(!(quesIndex < quizData.questions?.length - 1)){
+                seeResult()
+               }
+               else{
+                nextQuestion()}
+            }
+        }
+        const ticking = setInterval(countDown,1000)
+        return () => {
+            clearInterval(ticking)
+        }
+
+    } ,[timer,quesIndex])
+
+    const nextQuestion = () => {
+        isSelected ===false && setUserInput((userInput)=>[...userInput,null ])
+        setQuesIndex((quesIndex) => quesIndex + 1);
+        setIsSelected(false);
+        setTimer(30)
+    }
+    const seeResult = () => {
+        navigate(`/result/${id}`);
+        localStorage.setItem('userScore',score)
+        localStorage.setItem('userInput',JSON.stringify(userInput))
     }
 
+    const clickHandler = (option) =>{
+        setIsSelected(true)
+        setUserInput((userInput)=>[...userInput, option])
+        option===quizData.questions[quesIndex].answer ? setScore((score)=>score+10) : setScore(score)   
+    }
     const quitHandler = () => {
         toast.loading('Leaving Quiz',{duration: 800})
         setScore(0)
@@ -51,6 +81,10 @@ export const Question = () => {
           {loading ? <Loader/> :
             <section className="question-section">
                 <div className="question-container">
+                <div class="timer">
+                        <span className="material-icons-outlined md-18">timer</span>
+                        <span className="fw-semibold">0:{timer<10?`0${timer}`:timer}</span>
+                    </div>
                     <div>
                         <p className="text-xl">{quizData.questions?.[quesIndex].question}</p>
                     </div>
@@ -73,18 +107,13 @@ export const Question = () => {
 
 
                         {quesIndex < quizData.questions?.length - 1 && 
-                            <button className="btn icon-text-btn" onClick={() => {
-                                    setQuesIndex((quesIndex) => quesIndex + 1);
-                                    setIsSelected(false)
-                                }}>
-                            <span className="text-white decoration-none" >Next</span>
+                            <button className='btn text-white icon-text-btn'  onClick={() => nextQuestion()}>
+                            <span className="decoration-none" >Next</span>
                             <span className="material-icons md-18">east</span>
                             </button>
                         }
                         {!(quesIndex < quizData.questions?.length - 1) && 
-                            <button className="btn icon-text-btn" onClick={()=>{navigate(`/result/${id}`);
-                                localStorage.setItem('userScore',score)
-                                localStorage.setItem('userInput',JSON.stringify(userInput))}} >
+                            <button className="btn icon-text-btn" onClick={()=>seeResult()} >
                             <span className="text-white decoration-none">See Result</span>
                             <span className="material-icons md-18">east</span>
                         </button>}

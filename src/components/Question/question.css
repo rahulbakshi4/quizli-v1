@@ -11,8 +11,8 @@
     justify-content: center;
     border: 1px solid var(--clr-gray);
     border-radius: 10px;
-    gap: 1.5rem;
-    padding: 2.5rem;
+    gap: 1rem;
+    padding: 2rem;
     flex-direction: column;
     width: 100%;
 }
@@ -45,6 +45,15 @@
 }
 .cursor-disable{
     cursor:not-allowed;
+}
+.timer{
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    margin-inline: auto 0;
+    padding: .5rem 1rem;
+    border: 1px solid var(--clr-dark);
+    border-radius: 5px;
 }
 @media (min-width:900px){
     .question-section{

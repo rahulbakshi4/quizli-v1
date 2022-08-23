@@ -30,9 +30,8 @@ export const Login = () => {
             }
         }
         catch (err) {
-            console.log("error",err)
-            toast.error('Something Went Wrong!',{duration: 1500, position: 'bottom-center'})
-            setError(true)
+            err.code==="auth/user-not-found" ?
+            setError('User not found') :setError('Wrong Password')
         }
     }
     return (
@@ -40,6 +39,11 @@ export const Login = () => {
             <div className="form-container">
                 <h1 className="text-2xl fw-xbold text-center">Log In Here</h1>
                 <form onSubmit={loginHandler}>
+                {error && <div className="form-content">
+                        <div className="label-container">
+                            <Alert message={error} variant={'error'} />
+                        </div>
+                    </div>}
                     <div className="form-content">
                         <div className="label-container">
                             <label htmlFor="email">
@@ -61,11 +65,7 @@ export const Login = () => {
                                 placeholder="*********" required />
                         </div>
                     </div>
-                    {error && <div className="form-content">
-                        <div className="label-container">
-                            <Alert message={"Invalid Email or Password"} variant={'error'} />
-                        </div>
-                    </div>} 
+                     
                     <div className="form-content">
                         <button type="submit" className="form-btn bg-dark">
                             Login
