@@ -11,4 +11,5 @@
 .card{
     box-shadow: none;
     border: 2px solid var(--clr-gray-light);
+    cursor: default;
 }
