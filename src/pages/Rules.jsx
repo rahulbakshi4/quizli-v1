@@ -11,17 +11,20 @@ export const Rules = () => {
                     <h2 className="text-xl fw-semibold">Rules</h2>
                 </div>
                 <ul className="text-large">
-                   
                     <li>
-                        <span className="fw-bold">Rule 1:</span> On each correct answer 10
-                        points are awarded to the player
+                        <span class="fw-bold">Rule 1:</span> This is a timed quiz where
+                        you will get 30 seconds to answer a question.
                     </li>
                     <li>
-                        <span className="fw-bold">Rule 2:</span> No points will be deducted on
+                        <span className="fw-bold">Rule 2:</span> On each correct answer 10
+                        points are awarded to the player.
+                    </li>
+                    <li>
+                        <span className="fw-bold">Rule 3:</span> No points will be deducted on
                         wrong answers.
                     </li>
                     <li>
-                        <span className="fw-bold">Rule 3:</span> Each question has 3 choices
+                        <span className="fw-bold">Rule 4:</span> Each question has 3 choices
                         with only one correct choice.
                     </li>
                 </ul>
